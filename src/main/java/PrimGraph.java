@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 public class PrimGraph {
-    public void Prim(int G[][], int V){ // G -- матрица смежности и V -- кол-во вершин
+    public int Prim(int G[][], int V){ // G -- матрица смежности и V -- кол-во вершин
 
         int INF = Integer.MAX_VALUE; // используем значение для сравнения
         int countEdge;  // отслеживаем текущее кол-во проверенных ребер
@@ -38,6 +38,7 @@ public class PrimGraph {
             countEdge++;
         }
         System.out.println("Вес: " + minWeight);
+        return minWeight;
     }
 
 
