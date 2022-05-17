@@ -2,25 +2,27 @@ import java.util.Arrays;
 
 public class PrimGraph {
     public void Prim(int G[][], int V){ // G -- матрица смежности и V -- кол-во вершин
-        int INF = Integer.MAX_VALUE;
-        int cur_edge;
-        int minWeight;
-        boolean[] selected = new boolean[V];  //
+
+        int INF = Integer.MAX_VALUE; // используем значение для сравнения
+        int countEdge;  // отслеживаем текущее кол-во проверенных ребер
+        int minWeight; // значение минимального веса остовного дерева
+        boolean[] selected = new boolean[V];  // массив помеченных вершин
+
         Arrays.fill(selected, false);
-        cur_edge = 0;
+        countEdge = 0;
         minWeight = 0;
-        selected[0] = true;
+        selected[0] = true; // произвольная начальная вершина всегда помечена
         System.out.println("Edge : Weight");
 
-        while (cur_edge < V - 1) {
+        while (countEdge < V - 1) {
             int min = INF;
             int row = 0;
             int col = 0;
 
-            for (int i = 0; i < V; i++) {
-                if (selected[i] == true) {
-                    for (int j = 0; j < V; j++) {
-                        if (!selected[j] && G[i][j] != 0) {
+            for (int i = 0; i < V; i++) { // i - индекс строки
+                if (selected[i]) {
+                    for (int j = 0; j < V; j++) { // j - индекс столбца
+                        if (!selected[j] && G[i][j] != 0) { // вершина не помечена и есть ребро
                             if (min > G[i][j]) {
                                 min = G[i][j];
                                 row = i;
@@ -32,8 +34,8 @@ public class PrimGraph {
             }
             System.out.println(row + " - " + col + " :  " + G[row][col]);
             minWeight += G[row][col];
-            selected[col] = true;
-            cur_edge++;
+            selected[col] = true; // вершина помечена
+            countEdge++;
         }
         System.out.println("Вес: " + minWeight);
     }
